@@ -1,6 +1,8 @@
 using Events_Manager_14905;
 using Events_Manager_14905.Data;
+using Events_Manager_14905.Interfaces;
 using Events_Manager_14905.Models;
+using Events_Manager_14905.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
@@ -9,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddTransient<Seed>();
+builder.Services.AddScoped<IEventRepository, EventRepository>() ;
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
