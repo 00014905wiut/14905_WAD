@@ -6,7 +6,7 @@ namespace Events_Manager_14905.Models
 {
     public class Event
     {
-        [Key] // Marking EventId as the primary key
+        [Key] 
         public int EventId { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
@@ -27,6 +27,9 @@ namespace Events_Manager_14905.Models
         public DateTime EventCreated { get; set; } = DateTime.Now;
 
         public DateTime EventFor { get; set; }
+
+        
+        public ICollection<EventRating> Ratings { get; set; }
 
         public int TimeLeft()
         {
