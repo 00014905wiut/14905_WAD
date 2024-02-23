@@ -9,6 +9,8 @@ namespace Events_Manager_14905.Helper
         public MappingProfiles()
         {
             CreateMap<Event, EventDto>();
+            CreateMap<EventRating,  EventRatingDto>();
+            CreateMap<EventNames, EventNamesDto>();
         }
     }
 }

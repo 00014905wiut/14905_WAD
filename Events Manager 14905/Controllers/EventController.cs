@@ -6,6 +6,8 @@ using System.Net.Http.Headers;
 
 
 using System.Collections.Generic;
+using AutoMapper;
+using Events_Manager_14905.Dto;
 
 namespace Events_Manager_14905.Controllers
 {
@@ -14,10 +16,12 @@ namespace Events_Manager_14905.Controllers
     public class EventController : ControllerBase
     {
         private readonly IEventRepository _eventRepository;
+        private readonly IMapper _mapper;
 
-        public EventController(IEventRepository eventRepository)
+        public EventController(IEventRepository eventRepository, IMapper mapper)
         {
             _eventRepository = eventRepository;
+            _mapper = mapper;
         }
 
         [HttpGet("events")]
@@ -42,7 +46,7 @@ namespace Events_Manager_14905.Controllers
             if (!_eventRepository.EventExists(id))
                 return NotFound();
 
-            var _event = _eventRepository.GetEvent(id);
+            var _event = _mapper.Map<Event>(_eventRepository.GetEvent(id));
 
             if (!ModelState.IsValid)
                 return BadRequest();
